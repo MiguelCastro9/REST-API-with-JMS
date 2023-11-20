@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author Miguel Castro
  */
-public interface PersonRepository  extends MongoRepository<PersonModel, Long>{
+public interface PersonRepository  extends MongoRepository<PersonModel, String> {
 }

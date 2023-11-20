@@ -1,36 +1,29 @@
-package com.api.model;
+package com.api.dto;
 
+import com.api.model.PersonModel;
 import java.util.Date;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author Miguel Castro
  */
-@Document(collection = "Person")
-public class PersonModel {
-
-    @Id
-    // (String) because I use MongoDB
+public class PersonResponseDto {
+    
     private String id;
     
     private String name;
     
     private Date birth_date;
 
-    public PersonModel() {
-    }
-
-    public PersonModel(String name, Date birth_date) {
+    public PersonResponseDto(String id, String name, Date birth_date) {
+        this.id = id;
         this.name = name;
         this.birth_date = birth_date;
     }
     
-    public PersonModel(String id, String name, Date birth_date) {
-        this.id = id;
-        this.name = name;
-        this.birth_date = birth_date;
+    public static PersonResponseDto convertEntityForPersonDto(PersonModel personModel) {
+        return new PersonResponseDto(personModel.getId(), personModel.getName(), 
+                personModel.getBirth_date());
     }
 
     public String getId() {
