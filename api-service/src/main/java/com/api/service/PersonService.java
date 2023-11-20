@@ -7,8 +7,10 @@ import com.api.model.PersonModel;
 import com.api.repository.PersonRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +38,11 @@ public class PersonService {
     }
 
     public List<PersonModel> list() {
-        return personRepository.findAll();
-    }
+    return personRepository.findAll()
+            .stream()
+            .sorted(Comparator.comparing(PersonModel::getId, Comparator.reverseOrder()))
+            .collect(Collectors.toList());
+}
 
     public Optional<PersonModel> find(String id) {
         return personRepository.findById(id);

@@ -23,7 +23,6 @@ td {
   height: 100%;
 }
 
-.custom-alert-validation {
-  margin-top: 10px;
-  display: none;
+.alert-message {
+  color: red;
 }
