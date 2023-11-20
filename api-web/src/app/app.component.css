@@ -1,0 +1,29 @@
+.navbar-text {
+  color: #fff;
+}
+
+td {
+  cursor: pointer;
+}
+
+.custom-footer {
+  background-color: #116EFD;
+  color: #fff;
+  font-size: 12px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.custom-card {
+  height: 320px;
+}
+
+.overflow-scroll {
+  overflow: auto;
+  height: 100%;
+}
+
+.custom-alert-validation {
+  margin-top: 10px;
+  display: none;
+}

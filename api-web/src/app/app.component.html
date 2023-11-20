@@ -1,1 +1,65 @@
-<h1>test</h1>
+<header>
+  <nav class="navbar bg-primary">
+    <div class="container-fluid">
+      <span class="navbar-text">Management of persons</span>
+    </div>
+  </nav>
+</header>
+<br>
+<div class="d-flex flex-column vh-100">
+  <main role="main" class="layout-main flex-fill">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card custom-card">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+              <p>Enter your name and date of birth.</p>
+              <hr>
+              <form>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label for="name">Your name</label>
+                    <input type="text" id="name" name="name" class="form-control" minlength="3" maxlength="40" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="birth_date">Your birth date</label>
+                    <input type="date" id="birth_date" name="birth_date" class="form-control" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <br>
+                    <button type="button" class="btn btn-outline-success">Register</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card custom-card">
+            <div class="card-header">Persons</div>
+            <div class="card-body overflow-scroll">
+              <table class="text-center table table-striped table-hover table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Birth date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Miguel Castro</td>
+                    <td>21/07/1999</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="custom-footer">
+  <div class="container">&copy; Miguel Castro | 2023</div>
+</footer>
