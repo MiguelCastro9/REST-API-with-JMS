@@ -35,4 +35,9 @@ public class NotificationResponseDto {
     public void setMessage_date(LocalDateTime message_date) {
         this.message_date = message_date;
     }
+
+    @Override
+    public String toString() {
+        return "NotificationResponseDto{" + "message=" + message + ", message_date=" + message_date + '}';
+    }
 }

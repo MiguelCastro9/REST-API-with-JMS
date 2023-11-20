@@ -7,7 +7,6 @@ import com.api.model.PersonModel;
 import com.api.repository.PersonRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +74,4 @@ public class PersonService {
                 .sorted((n1, n2) -> n2.getMessage_date().compareTo(n1.getMessage_date()))
                 .toList();
     }
-
 }

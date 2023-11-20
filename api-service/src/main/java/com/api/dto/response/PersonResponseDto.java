@@ -49,4 +49,9 @@ public class PersonResponseDto {
     public void setBirth_date(Date birth_date) {
         this.birth_date = birth_date;
     }
+
+    @Override
+    public String toString() {
+        return "PersonResponseDto{" + "id=" + id + ", name=" + name + ", birth_date=" + birth_date + '}';
+    }
 }
