@@ -1,7 +1,8 @@
 package com.api.controller;
 
-import com.api.dto.PersonRequestDto;
-import com.api.dto.PersonResponseDto;
+import com.api.dto.request.PersonRequestDto;
+import com.api.dto.response.NotificationResponseDto;
+import com.api.dto.response.PersonResponseDto;
 import com.api.exception.MessageCustomException;
 import com.api.model.PersonModel;
 import com.api.service.PersonService;
@@ -64,5 +65,10 @@ public class PersonController {
     public ResponseEntity<?> delete(@PathVariable String id) {
         personService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+    
+    @GetMapping("/notifications")
+    public List<NotificationResponseDto> getNotifications() {
+        return personService.getNotifications();
     }
 }

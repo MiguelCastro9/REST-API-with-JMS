@@ -1,4 +1,4 @@
-package com.api.dto;
+package com.api.dto.request;
 
 import com.api.model.PersonModel;
 import jakarta.validation.constraints.NotBlank;

@@ -1,9 +1,13 @@
 package com.api.service;
 
+import com.api.dto.response.NotificationResponseDto;
 import com.api.exception.MessageCustomException;
 import com.api.jms.sender.JmsSender;
 import com.api.model.PersonModel;
 import com.api.repository.PersonRepository;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +26,13 @@ public class PersonService {
     @Autowired
     private JmsSender sender;
 
+    private List<NotificationResponseDto> notifications = new ArrayList<>();
+
     public PersonModel save(PersonModel personModel) {
 
         personRepository.save(personModel);
-        sender.sendMessage("saved successfully!");
+        sender.sendMessage("a new user has been saved!");
+        notifications.add(new NotificationResponseDto("a new user has been saved!", LocalDateTime.now()));
         return personModel;
     }
 
@@ -42,7 +49,8 @@ public class PersonService {
                 .map(existingPerson -> {
                     existingPerson.setName(person.getName());
                     existingPerson.setBirth_date(person.getBirth_date());
-                    sender.sendMessage("updated successfully!");
+                    sender.sendMessage("a new user has been updated!");
+                    notifications.add(new NotificationResponseDto("a new user has been updated!", LocalDateTime.now()));
                     return personRepository.save(existingPerson);
                 })
                 .orElseThrow(() -> new MessageCustomException("Person not found."));
@@ -53,11 +61,19 @@ public class PersonService {
                 .ifPresentOrElse(
                         personModel -> {
                             personRepository.deleteById(id);
-                            sender.sendMessage("deleted successfully!");
+                            sender.sendMessage("a new user has been deleted!");
+                            notifications.add(new NotificationResponseDto("a new user has been deleted!", LocalDateTime.now()));
                         },
                         () -> {
                             throw new MessageCustomException("Person not found.");
                         }
                 );
     }
+
+    public List<NotificationResponseDto> getNotifications() {
+        return notifications.stream()
+                .sorted((n1, n2) -> n2.getMessage_date().compareTo(n1.getMessage_date()))
+                .toList();
+    }
+
 }
