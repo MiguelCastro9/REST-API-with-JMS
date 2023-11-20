@@ -1,6 +1,7 @@
 package com.api.service;
 
 import com.api.exception.MessageCustomException;
+import com.api.jms.sender.JmsSender;
 import com.api.model.PersonModel;
 import com.api.repository.PersonRepository;
 import java.util.List;
@@ -18,8 +19,14 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private JmsSender sender;
+
     public PersonModel save(PersonModel personModel) {
-        return personRepository.save(personModel);
+
+        personRepository.save(personModel);
+        sender.sendMessage("saved successfully!");
+        return personModel;
     }
 
     public List<PersonModel> list() {
@@ -35,12 +42,22 @@ public class PersonService {
                 .map(existingPerson -> {
                     existingPerson.setName(person.getName());
                     existingPerson.setBirth_date(person.getBirth_date());
+                    sender.sendMessage("updated successfully!");
                     return personRepository.save(existingPerson);
                 })
                 .orElseThrow(() -> new MessageCustomException("Person not found."));
     }
 
     public void delete(String id) {
-        personRepository.deleteById(id);
+        personRepository.findById(id)
+                .ifPresentOrElse(
+                        personModel -> {
+                            personRepository.deleteById(id);
+                            sender.sendMessage("deleted successfully!");
+                        },
+                        () -> {
+                            throw new MessageCustomException("Person not found.");
+                        }
+                );
     }
 }
