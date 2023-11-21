@@ -2,15 +2,12 @@
   <nav class="navbar bg-primary">
     <div class="container-fluid">
       <span class="navbar-text">Management of persons</span>
-
         <button type="button" id="notification" class="btn btn-light btn-notification" data-bs-toggle="modal" data-bs-target="#notificationModal">
           <i class="bi bi-bell"></i>
           <img class="img-notification" width="24" height="22" src="assets/icons/bell.png" alt="notification">
           <span *ngIf="notifications.length < 99" class="badge text-bg-danger">{{ notifications.length }}</span>
           <span *ngIf="notifications.length > 99" class="badge text-bg-danger">99+</span>
         </button>
-
-
     </div>
   </nav>
   <!-- Modal -->

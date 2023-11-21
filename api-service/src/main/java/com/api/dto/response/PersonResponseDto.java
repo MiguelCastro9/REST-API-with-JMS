@@ -1,7 +1,6 @@
 package com.api.dto.response;
 
 import com.api.model.PersonModel;
-import java.util.Date;
 
 /**
  *

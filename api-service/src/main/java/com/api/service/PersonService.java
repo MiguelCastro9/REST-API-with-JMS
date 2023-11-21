@@ -23,14 +23,11 @@ public class PersonService {
 
     @Autowired
     private PersonRepository personRepository;
-
     @Autowired
     private JmsSender sender;
-
     private List<NotificationResponseDto> notifications = new ArrayList<>();
 
     public PersonModel save(PersonModel personModel) {
-
         personRepository.save(personModel);
         sender.sendMessage("a new user has been saved!");
         notifications.add(new NotificationResponseDto("a new user has been saved!", LocalDateTime.now()));
@@ -38,11 +35,11 @@ public class PersonService {
     }
 
     public List<PersonModel> list() {
-    return personRepository.findAll()
-            .stream()
-            .sorted(Comparator.comparing(PersonModel::getId, Comparator.reverseOrder()))
-            .collect(Collectors.toList());
-}
+        return personRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(PersonModel::getId, Comparator.reverseOrder()))
+                .collect(Collectors.toList());
+    }
 
     public Optional<PersonModel> find(String id) {
         return personRepository.findById(id);
