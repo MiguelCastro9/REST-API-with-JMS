@@ -24,8 +24,8 @@ export class PersonService {
     return this.http.get<Person>(this.api_url + '/find/' + id);
   }
 
-  update(id: any){
-    return this.http.put<Person>(this.api_url + '/update/', id);
+  update(id: any, person: Person){
+    return this.http.put<Person>(this.api_url + '/update/' + id, person);
   }
 
   delete(id: any){

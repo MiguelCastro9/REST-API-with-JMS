@@ -17,12 +17,14 @@ export class AppComponent {
   };
   alertMessage = '';
   persons: Person[] = [];
-  selectedPersonId: any;
+  activeSave = true;
+  activeUpdate = false;
 
   constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
     this.list();
+    this.activeSave = true;
   }
 
   validForm() {
@@ -47,11 +49,30 @@ export class AppComponent {
   }
 
   public list() {
-    this.personService.list().subscribe(data => this.persons = data);
+    this.activeSave = true;
+    this.activeUpdate = false;
+    this.personService.list().subscribe(data => {
+      this.persons = data;
+      this.person = {
+        id: '',
+        name: '',
+        birth_date: undefined
+      };
+      this.alertMessage = '';
+    });
   }
 
-  public update(id: any) {
-    this.personService.update(id).subscribe(data => {
+  getPerson(person: Person) {
+    this.activeUpdate = true;
+    this.activeSave = false;
+    this.person = { ...person };
+  }
+
+  public update(person: Person) {
+    if (!this.validForm()) {
+      return;
+    }
+    this.personService.update(person.id, person).subscribe(data => {
       this.list();
     })
   }

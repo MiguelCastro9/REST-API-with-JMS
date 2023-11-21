@@ -24,11 +24,15 @@
                   </div>
                   <div class="col-sm-6">
                     <label for="birth_date">Your birth date</label>
-                    <input type="date" id="birth_date" name="birth_date" [(ngModel)]="person.birth_date" class="form-control" required>
+                    <input type="date" id="birth_date" name="birth_date" [ngModel]="person.birth_date | date: 'yyyy-MM-dd' : 'UTC'" class="form-control" required>
                   </div>
                   <div class="col-sm-6">
                     <br>
-                    <button type="button" (click)="save(person);" class="btn btn-outline-success">Save</button>
+                    <button *ngIf="activeSave" type="button" (click)="save(person);" class="btn btn-outline-success">Save</button>
+                    <button *ngIf="!activeSave" disabled type="button" (click)="save(person);" class="btn btn-outline-success">Save</button>
+                    &nbsp;
+                    <button *ngIf="activeUpdate" type="button" (click)="update(person);" class="btn btn-outline-secondary">Update</button>
+                    <button *ngIf="!activeUpdate" type="button" disabled (click)="update(person);" class="btn btn-outline-secondary">Update</button>
                     <br><br>
                     <p class="alert-message">{{ alertMessage }}</p>
                   </div>
@@ -53,8 +57,8 @@
                 <tbody>
                   <tr *ngFor="let person of persons">
                     <td>{{ person.name }}</td>
-                    <td>{{ person.birth_date | date: 'dd/MM/yyyy'}}</td>
-                    <td (click)="update(person.id);">update</td>
+                    <td>{{ person.birth_date | date: 'dd/MM/yyyy' : 'UTC' }}</td>
+                    <td (click)="getPerson(person);">update</td>
                     <td (click)="delete(person.id);">delete</td>
                   </tr>
                 </tbody>

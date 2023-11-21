@@ -48,11 +48,11 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
-    public PersonModel update(String id, PersonModel person) {
+    public PersonModel update(String id, PersonModel personModel) {
         return personRepository.findById(id)
                 .map(existingPerson -> {
-                    existingPerson.setName(person.getName());
-                    existingPerson.setBirth_date(person.getBirth_date());
+                    existingPerson.setName(personModel.getName());
+                    existingPerson.setBirth_date(personModel.getBirth_date());
                     sender.sendMessage("a new user has been updated!");
                     notifications.add(new NotificationResponseDto("a new user has been updated!", LocalDateTime.now()));
                     return personRepository.save(existingPerson);
