@@ -1,6 +1,7 @@
 import { PersonService } from './service/person.service';
 import { Person } from './model/person';
 import { Component } from '@angular/core';
+import { Notifications } from './model/notifications';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +25,14 @@ export class AppComponent {
     name: '',
     birth_date: ''
   };
+  notifications: Notifications[] = [];
 
   constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
     this.list();
     this.activeSave = true;
+    this.getNotifications();
   }
 
   validForm() {
@@ -45,8 +48,6 @@ export class AppComponent {
   }
 
   public save(person: Person) {
-    console.log(person.birth_date);
-
     if (!this.validForm()) {
       return;
     }
@@ -72,6 +73,7 @@ export class AppComponent {
       };
       this.alertMessage = '';
     });
+    this.getNotifications();
   }
 
   getPerson(person: Person) {
@@ -94,5 +96,11 @@ export class AppComponent {
     this.personService.delete(id).subscribe(data => {
       this.list();
     })
+  }
+
+  public getNotifications() {
+    this.personService.getNotifications().subscribe(data => {
+      this.notifications = data;
+    });
   }
 }

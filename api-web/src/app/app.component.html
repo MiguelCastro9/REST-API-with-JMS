@@ -2,8 +2,44 @@
   <nav class="navbar bg-primary">
     <div class="container-fluid">
       <span class="navbar-text">Management of persons</span>
+
+        <button type="button" id="notification" class="btn btn-light btn-notification" data-bs-toggle="modal" data-bs-target="#notificationModal">
+          <i class="bi bi-bell"></i>
+          <img class="img-notification" width="24" height="22" src="assets/icons/bell.png" alt="notification">
+          <span *ngIf="notifications.length < 99" class="badge text-bg-danger">{{ notifications.length }}</span>
+          <span *ngIf="notifications.length > 99" class="badge text-bg-danger">99+</span>
+        </button>
+
+
     </div>
   </nav>
+  <!-- Modal -->
+  <div class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="notificationModalLabel">Notifications</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="text-center table table-striped table-hover table-responsive">
+            <thead>
+              <tr>
+                <th scope="col">Message</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let notification of notifications">
+                <td>{{ notification.message }}</td>
+                <td>{{ notification.message_date | date: 'dd/MM/yyyy HH:mm' : 'UTC' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 <br>
 <div class="d-flex flex-column vh-100">

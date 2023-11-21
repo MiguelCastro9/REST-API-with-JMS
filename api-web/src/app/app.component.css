@@ -26,3 +26,11 @@ img {
 .alert-message {
   color: red;
 }
+
+.btn-notification {
+  margin-right: 25px;
+}
+
+.img-notification {
+  margin-right: 5px;
+}
