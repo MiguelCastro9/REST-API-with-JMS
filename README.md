@@ -1,6 +1,6 @@
 ## Overview
 
-Integrating an external API in Python.
+An application that notifies each operation carried out in the system, a development idea to use messaging with JMS (Java Message Service).
 
 ## Execution
 
