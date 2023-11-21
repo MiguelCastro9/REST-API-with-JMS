@@ -13,9 +13,9 @@ public class PersonResponseDto {
     
     private String name;
     
-    private Date birth_date;
+    private String birth_date;
 
-    public PersonResponseDto(String id, String name, Date birth_date) {
+    public PersonResponseDto(String id, String name, String birth_date) {
         this.id = id;
         this.name = name;
         this.birth_date = birth_date;
@@ -42,11 +42,11 @@ public class PersonResponseDto {
         this.name = name;
     }
 
-    public Date getBirth_date() {
+    public String getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Date birth_date) {
+    public void setBirth_date(String birth_date) {
         this.birth_date = birth_date;
     }
 

@@ -19,7 +19,7 @@ public class PersonRequestDto {
     private String name;
     
     @NotNull(message = "Birth date is required.")
-    private Date birth_date;
+    private String birth_date;
     
     public PersonModel convertPersonDtoForEntity() {
         return new PersonModel(name, birth_date);
@@ -45,11 +45,11 @@ public class PersonRequestDto {
         this.name = name;
     }
 
-    public Date getBirth_date() {
+    public String getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Date birth_date) {
+    public void setBirth_date(String birth_date) {
         this.birth_date = birth_date;
     }
 

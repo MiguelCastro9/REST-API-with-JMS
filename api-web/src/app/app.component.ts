@@ -13,12 +13,17 @@ export class AppComponent {
   person: Person = {
     id: '',
     name: '',
-    birth_date: undefined
+    birth_date: ''
   };
   alertMessage = '';
   persons: Person[] = [];
   activeSave = true;
   activeUpdate = false;
+  personSelected: Person = {
+    id: '',
+    name: '',
+    birth_date: ''
+  };
 
   constructor(private personService: PersonService) { }
 
@@ -40,6 +45,8 @@ export class AppComponent {
   }
 
   public save(person: Person) {
+    console.log(person.birth_date);
+
     if (!this.validForm()) {
       return;
     }
@@ -56,7 +63,12 @@ export class AppComponent {
       this.person = {
         id: '',
         name: '',
-        birth_date: undefined
+        birth_date: ''
+      };
+      this.personSelected = {
+        id: '',
+        name: '',
+        birth_date: ''
       };
       this.alertMessage = '';
     });
@@ -66,6 +78,7 @@ export class AppComponent {
     this.activeUpdate = true;
     this.activeSave = false;
     this.person = { ...person };
+    this.personSelected = person;
   }
 
   public update(person: Person) {

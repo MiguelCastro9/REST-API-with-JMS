@@ -24,7 +24,7 @@
                   </div>
                   <div class="col-sm-6">
                     <label for="birth_date">Your birth date</label>
-                    <input type="date" id="birth_date" name="birth_date" [ngModel]="person.birth_date | date: 'yyyy-MM-dd' : 'UTC'" class="form-control" required>
+                    <input type="date" id="birth_date" name="birth_date" [(ngModel)]="person.birth_date" class="form-control" required>
                   </div>
                   <div class="col-sm-6">
                     <br>
@@ -58,11 +58,31 @@
                   <tr *ngFor="let person of persons">
                     <td>{{ person.name }}</td>
                     <td>{{ person.birth_date | date: 'dd/MM/yyyy' : 'UTC' }}</td>
-                    <td (click)="getPerson(person);">update</td>
-                    <td (click)="delete(person.id);">delete</td>
+                    <td><img (click)="getPerson(person);" width="15" height="15" src="assets/icons/pencil.png" alt="update"></td>
+                    <td><img (click)="getPerson(person);" data-bs-toggle="modal" data-bs-target="#exampleModal" width="15" height="15" src="assets/icons/trash.png" alt="delete"></td>
                   </tr>
                 </tbody>
               </table>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Do you really want to delete this person ?</h1>
+                      <button (click)="list();" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p><strong>ID: </strong>{{ personSelected.id }}</p>
+                      <p><strong>Name: </strong>{{ personSelected.name }}</p>
+                      <p><strong>Birth date: </strong>{{ personSelected.birth_date | date: 'dd/MM/yyyy' : 'UTC' }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button (click)="list();" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button (click)="delete(personSelected.id);" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
